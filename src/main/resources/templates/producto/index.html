@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:replace="~{fragments/head :: head('Productos')}">
+</head>
+
+
+<body>
+
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+
+<div class="container">
+
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+
+
+<div>
+
+
+<h2>
+
+<i class="bi bi-capsule-pill text-primary"></i>
+
+Productos veterinarios
+
+
+</h2>
+
+
+<p class="text-muted">
+
+Control de medicamentos, accesorios e inventario
+
+</p>
+
+
+</div>
+
+
+
+
+
+<a th:href="@{/producto/new}"
+
+class="btn btn-primary btn-lg">
+
+
+<i class="bi bi-plus-circle-fill"></i>
+
+Nuevo Producto
+
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card shadow">
+
+
+
+<div class="card-body">
+
+
+
+<div class="table-responsive">
+
+
+
+
+
+<table class="table align-middle">
+
+
+
+
+
+<thead>
+
+
+<tr>
+
+
+<th>ID</th>
+
+
+<th>Código</th>
+
+
+<th>Producto</th>
+
+
+<th>Compra</th>
+
+
+<th>Venta</th>
+
+
+<th>Stock</th>
+
+
+<th>Categoría</th>
+
+
+<th class="text-center">Acciones</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+
+
+
+
+<tbody>
+
+
+
+<tr th:each="producto : ${productos}">
+
+
+
+
+
+<td th:text="${producto.idProd}"></td>
+
+
+
+
+
+
+
+<td>
+
+
+<span class="badge bg-secondary"
+
+th:text="${producto.codigo}">
+
+</span>
+
+
+</td>
+
+
+
+
+
+
+
+<td>
+
+
+<div class="d-flex align-items-center">
+
+
+
+<div class="product-icon me-2">
+
+
+<i class="bi bi-box-seam-fill"></i>
+
+
+</div>
+
+
+
+<span th:text="${producto.descripcion}"></span>
+
+
+
+</div>
+
+
+</td>
+
+
+
+
+
+
+
+
+<td>
+
+
+<span class="text-danger fw-bold">
+
+
+S/.
+
+<span th:text="${producto.precioCompra}"></span>
+
+
+</span>
+
+
+</td>
+
+
+
+
+
+
+
+
+
+<td>
+
+
+<span class="text-success fw-bold">
+
+
+S/.
+
+<span th:text="${producto.precioVenta}"></span>
+
+
+</span>
+
+
+</td>
+
+
+
+
+
+
+
+
+
+<td>
+
+
+<span th:if="${producto.stock > 10}"
+
+class="badge bg-success"
+
+th:text="${producto.stock}">
+
+
+</span>
+
+
+
+<span th:if="${producto.stock <= 10}"
+
+class="badge bg-danger"
+
+th:text="${producto.stock}">
+
+
+</span>
+
+
+</td>
+
+
+
+
+
+
+
+
+
+<td>
+
+
+<span class="badge bg-info"
+
+th:text="${producto.categoria.descripcion}">
+
+
+</span>
+
+
+</td>
+
+
+
+
+
+
+
+
+
+<td class="text-center">
+
+
+
+
+
+<a th:href="@{/producto/edit/{id}(id=${producto.idProd})}"
+
+class="btn btn-warning btn-sm">
+
+
+<i class="bi bi-pencil-fill"></i>
+
+
+</a>
+
+
+
+
+
+
+
+<a th:href="@{/producto/delete/{id}(id=${producto.idProd})}"
+
+class="btn btn-danger btn-sm"
+
+
+onclick="return confirm('¿Desea eliminar este producto?')">
+
+
+<i class="bi bi-trash-fill"></i>
+
+
+</a>
+
+
+
+
+
+</td>
+
+
+
+
+
+
+</tr>
+
+
+
+
+
+</tbody>
+
+
+
+
+</table>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Nuevo Usuario')}">
+</head>
+
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+            <div class="card shadow">
+                
+                <div class="card-header text-center">
+                    <h3 class="mb-0">
+                        <i class="bi bi-person-plus-fill"></i>
+                        Registrar Usuario
+                    </h3>
+                    <p class="mb-0 mt-2">
+                        Nuevo usuario del sistema
+                    </p>
+                </div>
+
+                <div class="card-body p-4">
+                    
+                    <form th:action="@{/usuario}"
+                          th:object="${usuario}"
+                          method="POST">
+
+                        <!-- Campo oculto para el ID -->
+                        <input type="hidden" th:field="*{id}" />
+
+                        <!-- NOMBRES Y APELLIDOS -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>
+                                    <i class="bi bi-person-fill"></i>
+                                    Nombres
+                                </label>
+                                <input type="text"
+                                       th:field="*{nombres}"
+                                       class="form-control"
+                                       placeholder="Ingrese nombres"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>
+                                    <i class="bi bi-person-vcard"></i>
+                                    Apellidos
+                                </label>
+                                <input type="text"
+                                       th:field="*{apellidos}"
+                                       class="form-control"
+                                       placeholder="Ingrese apellidos"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- USERNAME -->
+                        <div class="mb-3">
+                            <label>
+                                <i class="bi bi-person-badge-fill text-primary"></i>
+                                Nombre de Usuario
+                            </label>
+                            <input type="text"
+                                   th:field="*{username}"
+                                   class="form-control"
+                                   placeholder="Ingrese nombre de usuario"
+                                   required>
+                        </div>
+
+                        <!-- CLAVE -->
+                        <div class="mb-3">
+                            <label>
+                                <i class="bi bi-lock-fill text-danger"></i>
+                                Contraseña
+                            </label>
+                            <input type="password"
+                                   th:field="*{clave}"
+                                   class="form-control"
+                                   placeholder="Ingrese contraseña"
+                                   required>
+                        </div>
+
+                        <!-- ROL -->
+                        <div class="mb-4">
+                            <label>
+                                <i class="bi bi-shield-lock-fill text-warning"></i>
+                                Rol de Usuario
+                            </label>
+                            <select th:field="*{rol.id}" class="form-select" required>
+                                <option value="" disabled selected>-- Seleccione un Rol --</option>
+                                <option th:each="r : ${rolList}"
+                                        th:value="${r.id}"
+                                        th:text="${r.descripcion}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- BOTONES -->
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <button type="submit"
+                                        class="btn btn-primary w-100">
+                                    <i class="bi bi-save-fill"></i>
+                                    Guardar Usuario
+                                </button>
+                            </div>
+
+                            <div class="col-md-6">
+                                <a th:href="@{/usuario}"
+                                   class="btn btn-outline-secondary w-100">
+                                    <i class="bi bi-arrow-left-circle-fill"></i>
+                                    Cancelar
+                                </a>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Login')}">
+    <meta charset="UTF-8">
+    <title>Error de Login - Sistema de Ventas</title>
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white text-center">
+                    <h3>
+                        Error de Inicio de Sesión
+                    </h3>
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="mb-4">
+                        Usuario o clave incorrecta
+                    </h5>
+                    <p class="text-muted">
+                        Verifique sus credenciales e intente nuevamente.
+                    </p>
+                    <div class="mt-4">
+                        <a th:href="@{/login}"
+                           class="btn btn-primary">
+                            Volver al Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

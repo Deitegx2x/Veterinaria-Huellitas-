@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Veterinaria Huellitas')}"></head>
+
+<body>
+
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container">
+
+   
+    <div class="card shadow border-0 mb-5">
+
+        <div class="card-body p-5">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-8">
+
+                    <span class="badge bg-info mb-3 fs-6">
+                        🐾 Bienvenido
+                    </span>
+
+                    <h1 class="display-5">
+
+                        Veterinaria Huellitas
+
+                    </h1>
+
+                    <p class="lead mt-3">
+
+                        Cuidamos con amor la salud de tus mascotas.
+                        Desde este sistema podrás administrar clientes,
+                        mascotas, productos, ventas y reportes de una forma
+                        rápida, segura y organizada.
+
+                    </p>
+
+                    <div class="mt-4">
+
+                        <a th:href="@{/mascota}"
+                           class="btn btn-primary btn-lg me-2">
+
+                            <i class="bi bi-heart-pulse-fill"></i>
+
+                            Ver Mascotas
+
+                        </a>
+
+                        <a th:href="@{/venta/new}"
+                           class="btn btn-success btn-lg">
+
+                            <i class="bi bi-cart-plus-fill"></i>
+
+                            Nueva Venta
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 text-center">
+
+                    <img th:src="@{/images/logo.jpg}"
+                         class="img-fluid"
+                         style="max-height:260px;">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+  
+
+    <div class="row g-4">
+
+       
+
+        <div class="col-md-4">
+
+            <div class="card home-card h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-person-hearts display-3 text-primary"></i>
+
+                    <h4 class="mt-3">
+
+                        Clientes
+
+                    </h4>
+
+                    <p>
+
+                        Administra toda la información de los propietarios
+                        de las mascotas.
+
+                    </p>
+
+                    <a th:href="@{/cliente}"
+                       class="btn btn-primary">
+
+                        Ingresar
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+       
+        <div class="col-md-4">
+
+            <div class="card home-card h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-heart-pulse-fill display-3 text-danger"></i>
+
+                    <h4 class="mt-3">
+
+                        Mascotas
+
+                    </h4>
+
+                    <p>
+
+                        Registra y controla la historia clínica de cada
+                        mascota.
+
+                    </p>
+
+                    <a th:href="@{/mascota}"
+                       class="btn btn-primary">
+
+                        Ingresar
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        
+
+        <div class="col-md-4">
+
+            <div class="card home-card h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-capsule-pill display-3 text-success"></i>
+
+                    <h4 class="mt-3">
+
+                        Productos
+
+                    </h4>
+
+                    <p>
+
+                        Controla medicamentos, alimentos y accesorios.
+
+                    </p>
+
+                    <a th:href="@{/producto}"
+                       class="btn btn-primary">
+
+                        Ingresar
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+      
+
+        <div class="col-md-4">
+
+            <div class="card home-card h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-cart-check-fill display-3 text-warning"></i>
+
+                    <h4 class="mt-3">
+
+                        Ventas
+
+                    </h4>
+
+                    <p>
+
+                        Gestiona las ventas y genera comprobantes.
+
+                    </p>
+
+                    <a th:href="@{/venta}"
+                       class="btn btn-primary">
+
+                        Ingresar
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+       
+
+        <div class="col-md-4">
+
+            <div class="card home-card h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-people-fill display-3 text-info"></i>
+
+                    <h4 class="mt-3">
+
+                        Usuarios
+
+                    </h4>
+
+                    <p>
+
+                        Administración de usuarios del sistema.
+
+                    </p>
+
+                    <a th:href="@{/usuario}"
+                       class="btn btn-primary">
+
+                        Ingresar
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+        <div class="col-md-4">
+
+            <div class="card home-card h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-bar-chart-fill display-3 text-secondary"></i>
+
+                    <h4 class="mt-3">
+
+                        Reportes
+
+                    </h4>
+
+                    <p>
+
+                        Consulta reportes de ventas, clientes e inventario.
+
+                    </p>
+
+                    <a th:href="@{/reportes/ventas}"
+                       target="_blank"
+                       class="btn btn-primary">
+
+                        Ver Reportes
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+  
+
+    <div class="mt-5">
+
+        <div class="card border-0 shadow">
+
+            <div class="card-body text-center p-5">
+
+                <h3>
+
+                    ❤️ Porque ellos también son parte de la familia
+
+                </h3>
+
+                <p class="lead">
+
+                    Gracias por confiar en Veterinaria Huellitas.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+
+</body>
+
+</html>

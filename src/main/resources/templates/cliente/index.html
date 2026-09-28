@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:replace="~{fragments/head :: head('Clientes')}">
+</head>
+
+
+<body>
+
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+
+<div class="container">
+
+
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+
+<div>
+
+<h2>
+
+<i class="bi bi-people-fill text-primary"></i>
+
+Clientes
+
+</h2>
+
+
+<p class="text-muted">
+
+Administración de propietarios de mascotas
+
+</p>
+
+
+</div>
+
+
+
+
+<a th:href="@{/cliente/new}"
+   class="btn btn-primary btn-lg">
+
+
+<i class="bi bi-person-plus-fill"></i>
+
+Nuevo Cliente
+
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="card shadow">
+
+
+<div class="card-body">
+
+
+
+<div class="table-responsive">
+
+
+<table class="table align-middle">
+
+
+
+<thead>
+
+
+<tr>
+
+<th>
+
+ID
+
+</th>
+
+
+<th>
+
+Nombre
+
+</th>
+
+
+<th>
+
+Apellido
+
+</th>
+
+
+<th>
+
+Teléfono
+
+</th>
+
+
+<th>
+
+DNI
+
+</th>
+
+
+<th class="text-center">
+
+Acciones
+
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+<tbody>
+
+
+<tr th:each="cliente : ${clientes}">
+
+
+<td th:text="${cliente.idClie}">
+
+</td>
+
+
+<td th:text="${cliente.nombre}">
+
+</td>
+
+
+<td th:text="${cliente.apellido}">
+
+</td>
+
+
+<td>
+
+
+<i class="bi bi-telephone text-success"></i>
+
+<span th:text="${cliente.telefono}">
+</span>
+
+
+</td>
+
+
+
+<td>
+
+
+<span class="badge bg-info">
+
+<span th:text="${cliente.dni}"></span>
+
+</span>
+
+
+</td>
+
+
+
+
+
+<td class="text-center">
+
+
+<a th:href="@{/cliente/edit/{id}(id=${cliente.idClie})}"
+
+class="btn btn-warning btn-sm me-2">
+
+
+<i class="bi bi-pencil-fill"></i>
+
+
+</a>
+
+
+
+
+
+<a th:href="@{/cliente/delete/{id}(id=${cliente.idClie})}"
+
+class="btn btn-danger btn-sm"
+
+onclick="return confirm('¿Desea eliminar este cliente?')">
+
+
+<i class="bi bi-trash-fill"></i>
+
+
+</a>
+
+
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+
+</table>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+
+
+
+</body>
+
+
+</html>

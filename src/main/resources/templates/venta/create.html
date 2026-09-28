@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Nueva Venta')}">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container my-4">
+
+    <!-- Mensajes de Alerta -->
+    <div th:if="${mensaje != null}" th:class="'alert alert-' + ${clase} + ' alert-dismissible fade show'" role="alert">
+        <i th:class="${clase == 'success' ? 'bi bi-check-circle-fill' : 'bi bi-exclamation-triangle-fill'}"></i>
+        <span th:text="${mensaje}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="row">
+        <!-- Formulario Principal -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">
+                        <i class="bi bi-cart-check-fill"></i> Datos de la Venta
+                    </h4>
+                    <p class="mb-0 text-muted small">Complete la información del comprobante</p>
+                </div>
+                <div class="card-body p-4">
+                    <form th:action="@{/venta/terminar}" th:object="${venta}" method="post" id="formVenta">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-person-fill"></i> Cliente
+                            </label>
+                            <div class="input-group">
+                                <input type="hidden" th:field="*{idCliente}" id="idCliente"> 
+                                <input type="text" id="nombreCliente" class="form-control bg-light" readonly placeholder="Seleccione un cliente" required>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalClientes">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-heart-pulse-fill"></i> Mascota
+                            </label>
+                            <div class="input-group">
+                                <input type="hidden" th:field="*{idMascota}" id="idMascota">
+                                <input type="text" id="nombreMascota" class="form-control bg-light" readonly placeholder="Seleccione una mascota">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMascotas">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-person-badge-fill"></i> Cajera
+                            </label>
+                            <div class="input-group">
+                                <input type="hidden" th:field="*{codCajera}" id="codCajera"> 
+                                <input type="text" id="nombreCajera" class="form-control bg-light" readonly placeholder="Seleccione una cajera" required>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCajeras">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" id="btnTerminarVenta" class="btn btn-primary">
+                                <i class="bi bi-save-fill"></i> Terminar Venta
+                            </button>
+                            <a th:href="@{/venta/limpiar}" class="btn btn-outline-danger"> 
+                                <i class="bi bi-x-circle"></i> Cancelar Venta
+                            </a> 
+                            <a th:href="@{/venta}" class="btn btn-outline-secondary"> 
+                                <i class="bi bi-arrow-left-circle"></i> Listado Ventas
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carrito de Compras -->
+        <div class="col-lg-8">
+            <div class="card shadow mb-4">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">
+                        <i class="bi bi-upc-scan"></i> Agregar Producto al Carrito
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form th:action="@{/venta/agregar}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Código de Producto</label> 
+                            <input type="text" name="codigo" class="form-control" autofocus autocomplete="off" placeholder="Ingrese o escanee el código">
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0 fw-bold">
+                            <i class="bi bi-cash-stack"></i> Total General:
+                        </h4>
+                        <h3 class="text-success fw-bold mb-0">
+                            S/ <span th:text="${#numbers.formatDecimal(total, 1, 'POINT', 2, 'COMMA')}">0.00</span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">
+                        <i class="bi bi-cart-fill"></i> Productos Seleccionados
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <table class="table table-striped table-bordered align-middle mb-0">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Código</th>
+                                <th>Precio Venta</th>
+                                <th>Cantidad</th>
+                                <th>Importe</th>
+                                <th width="90">Quitar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${carrito != null and !#lists.isEmpty(carrito)}" th:each="producto, iterador : ${carrito}">
+                                <td th:text="${producto.descripcion}"></td>
+                                <td class="text-center" th:text="${producto.codigo}"></td>
+                                <td class="text-end" th:text="${'S/ ' + #numbers.formatDecimal(producto.precioVenta, 1, 'POINT', 2, 'COMMA')}"></td>
+                                <td class="text-center" th:text="${producto.cantidad}"></td>
+                                <td class="text-end" th:text="${'S/ ' + #numbers.formatDecimal(producto.total, 1, 'POINT', 2, 'COMMA')}"></td>
+                                <td class="text-center">
+                                    <form th:action="@{/venta/quitar/{indice}(indice=${iterador.index})}" method="post">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr th:if="${carrito == null or #lists.isEmpty(carrito)}">
+                                <td colspan="6" class="text-center text-muted py-4">
+                                    <i class="bi bi-cart-x fs-3 d-block mb-2"></i>
+                                    No hay productos agregados al carrito
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CLIENTES -->
+<div class="modal fade" id="modalClientes" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="bi bi-search"></i> Buscar Cliente</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <table class="table table-striped table-bordered align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombres y Apellidos</th>
+                            <th>DNI</th>
+                            <th class="text-center">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${clienteList != null}" th:each="cli : ${clienteList}">
+                            <td th:text="${cli.idClie}"></td>
+                            <td th:text="${(cli.nombre != null ? cli.nombre : '') + ' ' + (cli.apellido != null ? cli.apellido : '')}"></td>
+                            <td th:text="${cli.dni}"></td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-success btn-sm"
+                                    th:attr="data-id=${cli.idClie}, data-nombre=${(cli.nombre != null ? cli.nombre : '') + ' ' + (cli.apellido != null ? cli.apellido : '')}"
+                                    onclick="seleccionarCliente(this)">Seleccionar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL MASCOTAS -->
+<div class="modal fade" id="modalMascotas" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="bi bi-search"></i> Buscar Mascota</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <table class="table table-striped table-bordered align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Especie</th>
+                            <th class="text-center">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${mascotaList != null}" th:each="mas : ${mascotaList}">
+                            <td th:text="${mas.idMascota}"></td>
+                            <td th:text="${mas.nombre}"></td>
+                            <td th:text="${mas.especie}"></td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-success btn-sm"
+                                    th:attr="data-id=${mas.idMascota}, data-nombre=${mas.nombre}"
+                                    onclick="seleccionarMascota(this)">Seleccionar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CAJERAS -->
+<div class="modal fade" id="modalCajeras" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="bi bi-search"></i> Buscar Cajera</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <table class="table table-striped table-bordered align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombres</th>
+                            <th class="text-center">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${cajeraVentaList != null}" th:each="cajera : ${cajeraVentaList}">
+                            <td th:text="${cajera.id}"></td>
+                            <td th:text="${cajera.nombres}"></td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-success btn-sm"
+                                    th:attr="data-id=${cajera.id}, data-nombre=${cajera.nombres}"
+                                    onclick="seleccionarCajera(this)">Seleccionar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+
+<script>
+    function cerrarModal(idModal) {
+        const modalElement = document.getElementById(idModal);
+        const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+        modalInstance.hide();
+    }
+
+    function seleccionarCliente(btn) {
+        document.getElementById('idCliente').value = btn.getAttribute('data-id');
+        document.getElementById('nombreCliente').value = btn.getAttribute('data-nombre');
+        cerrarModal('modalClientes');
+    }
+
+    function seleccionarMascota(btn) {
+        document.getElementById('idMascota').value = btn.getAttribute('data-id');
+        document.getElementById('nombreMascota').value = btn.getAttribute('data-nombre');
+        cerrarModal('modalMascotas');
+    }
+
+    function seleccionarCajera(btn) {
+        document.getElementById('codCajera').value = btn.getAttribute('data-id');
+        document.getElementById('nombreCajera').value = btn.getAttribute('data-nombre');
+        cerrarModal('modalCajeras');
+    }
+</script>
+</body>
+</html>

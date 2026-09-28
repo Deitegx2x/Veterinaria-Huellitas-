@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:replace="~{fragments/head :: head('Nueva Mascota')}">
+</head>
+
+
+<body>
+
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+
+<div class="container">
+
+
+
+<div class="row justify-content-center">
+
+
+<div class="col-lg-8">
+
+
+
+<div class="card shadow">
+
+
+
+
+
+<div class="card-header text-center">
+
+
+<h3>
+
+<i class="bi bi-heart-pulse-fill"></i>
+
+Registrar Mascota
+
+</h3>
+
+
+<p class="mb-0">
+
+Nuevo paciente veterinario
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="card-body p-4">
+
+
+
+
+
+<form th:action="@{/mascota}"
+
+      th:object="${mascota}"
+
+      method="POST">
+
+
+
+
+
+
+
+<div class="row">
+
+
+
+
+
+<div class="col-md-6 mb-3">
+
+
+<label>
+
+<i class="bi bi-paw-fill"></i>
+
+Nombre
+
+</label>
+
+
+<input type="text"
+
+       th:field="*{nombre}"
+
+       class="form-control"
+
+       placeholder="Nombre de mascota">
+
+
+</div>
+
+
+
+
+
+
+<div class="col-md-6 mb-3">
+
+
+<label>
+
+<i class="bi bi-tag-fill"></i>
+
+Raza
+
+</label>
+
+
+<input type="text"
+
+       th:field="*{raza}"
+
+       class="form-control"
+
+       placeholder="Raza">
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+
+
+
+
+
+<div class="col-md-6 mb-3">
+
+
+<label>
+
+<i class="bi bi-shield-fill-check"></i>
+
+Especie
+
+</label>
+
+
+
+<select class="form-select"
+
+        th:field="*{especie}">
+
+
+<option value="">
+
+Seleccione
+
+
+</option>
+
+
+<option value="Perro">
+
+Perro 🐶
+
+
+</option>
+
+
+<option value="Gato">
+
+Gato 🐱
+
+
+</option>
+
+
+<option value="Otro">
+
+Otro
+
+
+</option>
+
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="col-md-6 mb-3">
+
+
+<label>
+
+<i class="bi bi-gender-ambiguous"></i>
+
+Género
+
+</label>
+
+
+
+
+<select class="form-select"
+
+        th:field="*{genero}">
+
+
+<option value="">
+
+Seleccione
+
+</option>
+
+
+<option value="Macho">
+
+Macho
+
+
+</option>
+
+
+<option value="Hembra">
+
+Hembra
+
+
+</option>
+
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="mb-3">
+
+
+<label>
+
+
+<i class="bi bi-calendar-heart"></i>
+
+Fecha nacimiento
+
+
+</label>
+
+
+<input type="date"
+
+       th:field="*{fecha_nacimiento}"
+
+       class="form-control">
+
+
+</div>
+
+
+
+
+
+
+
+<div class="mb-3">
+
+
+<label>
+
+<i class="bi bi-person-fill"></i>
+
+Dueño
+
+
+</label>
+
+
+
+
+<select class="form-select"
+
+        th:field="*{cliente.idClie}">
+
+
+
+<option value="">
+
+Seleccione dueño
+
+</option>
+
+
+
+
+<option th:each="cliente : ${clientes}"
+
+        th:value="${cliente.idClie}"
+
+        th:text="${cliente.nombre + ' ' + cliente.apellido}">
+
+
+</option>
+
+
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="mb-4">
+
+
+<label>
+
+
+<i class="bi bi-journal-medical"></i>
+
+Historial médico
+
+
+</label>
+
+
+
+<textarea class="form-control"
+
+          rows="4"
+
+          th:field="*{historial}"
+
+          placeholder="Observaciones, vacunas, tratamientos...">
+
+</textarea>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="row g-3">
+
+
+
+
+
+<div class="col-md-6">
+
+
+<button class="btn btn-primary w-100">
+
+
+<i class="bi bi-save-fill"></i>
+
+Guardar Mascota
+
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="col-md-6">
+
+
+<a th:href="@{/mascota}"
+
+class="btn btn-outline-secondary w-100">
+
+
+<i class="bi bi-arrow-left-circle"></i>
+
+Cancelar
+
+
+</a>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+</form>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+
+
+
+</body>
+
+</html>
