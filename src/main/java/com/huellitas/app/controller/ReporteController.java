@@ -27,21 +27,22 @@ public class ReporteController {
         this.reporteService = reporteService;
     }
 
+    // Apuntamos directamente a los archivos .jrxml para forzar la compilación limpia en Render
     private static final Map<String, String> REPORTES = Map.of(
-        "ventas", "ReportVentas.jasper",
-        "inventario", "ReportInventario.jasper",
-        "clientes", "ReportClientes.jasper",
-        "mascotas", "ReportMascotas.jasper",
-        "ganancias", "ReportGanancias.jasper",
-        "boleta", "BoletaVenta.jasper"
+        "ventas", "ReportVentas.jrxml",
+        "inventario", "ReportInventario.jrxml",
+        "clientes", "ReportClientes.jrxml",
+        "mascotas", "ReportMascotas.jrxml",
+        "ganancias", "ReportGanancias.jrxml",
+        "boleta", "BoletaVenta.jrxml"
     );
 
     @GetMapping("/{tipo}")
     public ResponseEntity<byte[]> generarReporte(@PathVariable String tipo,
             @RequestParam(defaultValue = "ver") String modo) {
 
-        String jasperFile = REPORTES.get(tipo.toLowerCase());
-        if (jasperFile == null) {
+        String jrxmlFile = REPORTES.get(tipo.toLowerCase());
+        if (jrxmlFile == null) {
             return ResponseEntity.badRequest()
                     .contentType(MediaType.TEXT_PLAIN)
                     .body(("El tipo de reporte '" + tipo + "' no es válido.").getBytes());
@@ -49,10 +50,10 @@ public class ReporteController {
 
         try {
             Map<String, Object> parametros = new HashMap<>();
-            byte[] pdf = reporteService.generarReporte(jasperFile, parametros);
+            byte[] pdf = reporteService.generarReporte(jrxmlFile, parametros);
 
             String disposition = modo.equalsIgnoreCase("descargar") ? "attachment" : "inline";
-            String nombrePdf = jasperFile.replace(".jasper", ".pdf");
+            String nombrePdf = jrxmlFile.replace(".jrxml", ".pdf");
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, disposition + "; filename=" + nombrePdf)
@@ -75,15 +76,14 @@ public class ReporteController {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("idVenta", idVenta);
 
-            // Carga segura del logo sin cerrar el InputStream antes de tiempo
             ClassPathResource logoResource = new ClassPathResource("static/images/logo.jpg");
             if (logoResource.exists()) {
                 try (InputStream logoStream = logoResource.getInputStream()) {
                     parametros.put("logo", logoStream);
-                    return construirRespuestaPdf("BoletaVenta.jasper", "BoletaVenta_" + idVenta + ".pdf", parametros, modo);
+                    return construirRespuestaPdf("BoletaVenta.jrxml", "BoletaVenta_" + idVenta + ".pdf", parametros, modo);
                 }
             } else {
-                return construirRespuestaPdf("BoletaVenta.jasper", "BoletaVenta_" + idVenta + ".pdf", parametros, modo);
+                return construirRespuestaPdf("BoletaVenta.jrxml", "BoletaVenta_" + idVenta + ".pdf", parametros, modo);
             }
 
         } catch (Exception e) {
@@ -94,8 +94,8 @@ public class ReporteController {
         }
     }
 
-    private ResponseEntity<byte[]> construirRespuestaPdf(String jasperFile, String nombrePdf, Map<String, Object> parametros, String modo) throws Exception {
-        byte[] pdf = reporteService.generarReporte(jasperFile, parametros);
+    private ResponseEntity<byte[]> construirRespuestaPdf(String jrxmlFile, String nombrePdf, Map<String, Object> parametros, String modo) throws Exception {
+        byte[] pdf = reporteService.generarReporte(jrxmlFile, parametros);
         String disposition = modo.equalsIgnoreCase("descargar") ? "attachment" : "inline";
 
         return ResponseEntity.ok()
