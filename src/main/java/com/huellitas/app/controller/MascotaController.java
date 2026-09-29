@@ -1,5 +1,5 @@
-
 package com.huellitas.app.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +25,7 @@ public class MascotaController {
     @GetMapping("/mascota")
     public String listMascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.listarTodos());
-        return "Mascota/index";
+        return "mascota/index"; // Minúscula para coincidir con GitHub
     }
 
     @GetMapping("/mascota/new")
@@ -35,7 +35,7 @@ public class MascotaController {
 
         model.addAttribute("mascota", mascota);
         model.addAttribute("clientes", clienteService.listarTodos());
-        return "Mascota/create";
+        return "mascota/create"; // Minúscula para coincidir con GitHub
     }
 
     @PostMapping("/mascota")
@@ -49,7 +49,7 @@ public class MascotaController {
         Mascota mascota = mascotaService.buscarPorId(id);
         model.addAttribute("mascota", mascota);
         model.addAttribute("clientes", clienteService.listarTodos());
-        return "Mascota/edit";
+        return "mascota/edit"; // Minúscula para coincidir con GitHub
     }
 
     @PostMapping("/mascota/{id}")
