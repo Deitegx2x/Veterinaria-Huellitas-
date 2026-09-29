@@ -19,14 +19,15 @@
 		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<jasperreports.version>6.21.3</jasperreports.version>
 	</properties>
 
 	<dependencies>
-		<!-- JasperReports Core (6.x compatible con Linux/Docker) -->
+		<!-- JasperReports Core -->
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.20.6</version>
+			<version>${jasperreports.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -37,7 +38,13 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports-functions</artifactId>
-			<version>6.20.6</version>
+			<version>${jasperreports.version}</version>
+		</dependency>
+		<!-- Fuentes para evitar errores de renderizado en servidores Linux (Render) -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>${jasperreports.version}</version>
 		</dependency>
 
 		<!-- Spring Boot Starters -->
@@ -90,7 +97,7 @@
 			</resource>
 		</resources>
 		<plugins>
-			<!-- Plugin de Recursos para proteger archivos binarios de JasperReports -->
+			<!-- Plugin de Recursos para proteger archivos binarios y plantillas de JasperReports -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
