@@ -75,30 +75,15 @@ public class ReporteController {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("idVenta", idVenta);
 
-            // Carga segura del logo (si existe)
+            // Carga segura del logo sin cerrar el InputStream antes de tiempo
             ClassPathResource logoResource = new ClassPathResource("static/images/logo.jpg");
             if (logoResource.exists()) {
-                try (InputStream logo = logoResource.getInputStream()) {
-                    parametros.put("logo", logo);
-                    byte[] pdf = reporteService.generarReporte("BoletaVenta.jasper", parametros);
-
-                    String disposition = modo.equalsIgnoreCase("descargar") ? "attachment" : "inline";
-
-                    return ResponseEntity.ok()
-                            .header(HttpHeaders.CONTENT_DISPOSITION, disposition + "; filename=BoletaVenta_" + idVenta + ".pdf")
-                            .contentType(MediaType.APPLICATION_PDF)
-                            .body(pdf);
+                try (InputStream logoStream = logoResource.getInputStream()) {
+                    parametros.put("logo", logoStream);
+                    return construirRespuestaPdf("BoletaVenta.jasper", "BoletaVenta_" + idVenta + ".pdf", parametros, modo);
                 }
             } else {
-                // Si la boleta no requiere logo obligatoriamente o se puede enviar null
-                byte[] pdf = reporteService.generarReporte("BoletaVenta.jasper", parametros);
-
-                String disposition = modo.equalsIgnoreCase("descargar") ? "attachment" : "inline";
-
-                return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_DISPOSITION, disposition + "; filename=BoletaVenta_" + idVenta + ".pdf")
-                        .contentType(MediaType.APPLICATION_PDF)
-                        .body(pdf);
+                return construirRespuestaPdf("BoletaVenta.jasper", "BoletaVenta_" + idVenta + ".pdf", parametros, modo);
             }
 
         } catch (Exception e) {
@@ -107,5 +92,15 @@ public class ReporteController {
                     .contentType(MediaType.TEXT_PLAIN)
                     .body(("Error al generar la boleta de venta: " + e.getMessage()).getBytes());
         }
+    }
+
+    private ResponseEntity<byte[]> construirRespuestaPdf(String jasperFile, String nombrePdf, Map<String, Object> parametros, String modo) throws Exception {
+        byte[] pdf = reporteService.generarReporte(jasperFile, parametros);
+        String disposition = modo.equalsIgnoreCase("descargar") ? "attachment" : "inline";
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, disposition + "; filename=" + nombrePdf)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf);
     }
 }
