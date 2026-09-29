@@ -1,14 +1,14 @@
-# Etapa 1: Compilación con Maven 3.9 y JDK 17
+# Etapa 1: Compilación
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
-
 COPY src ./src
-RUN mvn clean package -DskipTests -Dmaven.test.skip=true
 
-# Etapa 2: Imagen ligera de ejecución
+# Agregamos -X para habilitar el log detallado
+RUN mvn clean package -DskipTests -X
+
+# Etapa 2: Ejecución
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
