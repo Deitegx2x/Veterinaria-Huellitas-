@@ -22,11 +22,11 @@
 	</properties>
 
 	<dependencies>
-		<!-- JasperReports Core -->
+		<!-- JasperReports Core (6.x compatible con Linux/Docker) -->
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>7.0.0</version>
+			<version>6.20.6</version>
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -36,13 +36,8 @@
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
-			<artifactId>jasperreports-pdf</artifactId>
-			<version>7.0.8</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.jasperreports</groupId>
-			<artifactId>jasperreports-fonts</artifactId>
-			<version>7.0.8</version>
+			<artifactId>jasperreports-functions</artifactId>
+			<version>6.20.6</version>
 		</dependency>
 
 		<!-- Spring Boot Starters -->
@@ -88,6 +83,12 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
