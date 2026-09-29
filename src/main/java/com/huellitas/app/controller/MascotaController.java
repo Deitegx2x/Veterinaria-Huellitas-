@@ -25,7 +25,7 @@ public class MascotaController {
     @GetMapping("/mascota")
     public String listMascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.listarTodos());
-        return "mascota/index";
+        return "Mascota/index";
     }
 
     @GetMapping("/mascota/new")
@@ -35,7 +35,7 @@ public class MascotaController {
 
         model.addAttribute("mascota", mascota);
         model.addAttribute("clientes", clienteService.listarTodos());
-        return "mascota/create";
+        return "Mascota/create";
     }
 
     @PostMapping("/mascota")
@@ -49,7 +49,7 @@ public class MascotaController {
         Mascota mascota = mascotaService.buscarPorId(id);
         model.addAttribute("mascota", mascota);
         model.addAttribute("clientes", clienteService.listarTodos());
-        return "mascota/edit";
+        return "Mascota/edit";
     }
 
     @PostMapping("/mascota/{id}")
