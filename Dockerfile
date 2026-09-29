@@ -5,8 +5,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Agregamos -X para habilitar el log detallado
-RUN mvn clean package -DskipTests -X
+RUN mvn clean package -DskipTests
 
 # Etapa 2: Ejecución
 FROM eclipse-temurin:17-jre
