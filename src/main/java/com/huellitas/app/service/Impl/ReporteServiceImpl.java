@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import com.huellitas.app.service.ReporteService;
@@ -14,6 +15,8 @@ import com.huellitas.app.service.ReporteService;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @Service
 public class ReporteServiceImpl implements ReporteService {
@@ -26,13 +29,29 @@ public class ReporteServiceImpl implements ReporteService {
 
     @Override
     public byte[] generarReporte(String nombreReporte, Map<String, Object> parametros) throws Exception {
-        // Asegúrate de pasar el nombre del archivo compilado (ej: "ReportClientes.jasper")
-        try (Connection connection = dataSource.getConnection()) {
-            InputStream jasperStream = new ClassPathResource("reportes/" + nombreReporte).getInputStream();
+        
+        // 1. Intentar buscar primero en "reportes/nombre.jasper"
+        Resource resource = new ClassPathResource("reportes/" + nombreReporte);
+        
+        // 2. Si no existe dentro de la subcarpeta 'reportes', buscar en la raíz del classpath ("nombre.jasper")
+        if (!resource.exists()) {
+            resource = new ClassPathResource(nombreReporte);
+        }
 
-            // Carga y llena directamente el reporte sin recompilar
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperStream, parametros, connection);
+        if (!resource.exists()) {
+            throw new IllegalArgumentException("No se encontró el archivo del reporte: " + nombreReporte);
+        }
 
+        try (Connection connection = dataSource.getConnection();
+             InputStream jasperStream = resource.getInputStream()) {
+
+            // Cargar el objeto JasperReport usando JRLoader (Evita fallos de InputStream en Linux/Docker)
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+
+            // Llenar el reporte
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, connection);
+
+            // Exportar a PDF
             return JasperExportManager.exportReportToPdf(jasperPrint);
         }
     }
