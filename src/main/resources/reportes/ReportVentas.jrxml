@@ -1,0 +1,231 @@
+<!-- Created with Jaspersoft Studio version 7.0.8.final using JasperReports Library version 7.0.8-6f896111  -->
+<jasperReport name="ReportVentas" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b867d53-6d4b-4657-8f56-2332fcd80142">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="veterinaria Data Adapter"/>
+	<query language="SQL"><![CDATA[SELECT nro_venta,
+	fecha,
+	id_cliente,
+	razon_social,
+	id_asesor_vta,
+	nombre_asesor_vta,
+	subtotal,
+	igv,
+	total
+FROM veterinaria.vista_reporte_ventas]]></query>
+	<field name="nro_venta" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="nro_venta"/>
+		<property name="com.jaspersoft.studio.field.label" value="nro_venta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vista_reporte_ventas"/>
+	</field>
+	<field name="fecha" class="java.util.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vista_reporte_ventas"/>
+	</field>
+	<field name="id_cliente" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_cliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_cliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vista_reporte_ventas"/>
+	</field>
+	<field name="razon_social" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="razon_social"/>
+		<property name="com.jaspersoft.studio.field.label" value="razon_social"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vista_reporte_ventas"/>
+	</field>
+	<field name="id_asesor_vta" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_asesor_vta"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_asesor_vta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vista_reporte_ventas"/>
+	</field>
+	<field name="nombre_asesor_vta" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre_asesor_vta"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre_asesor_vta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vista_reporte_ventas"/>
+	</field>
+	<field name="subtotal" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="subtotal"/>
+		<property name="com.jaspersoft.studio.field.label" value="subtotal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vista_reporte_ventas"/>
+	</field>
+	<field name="igv" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="igv"/>
+		<property name="com.jaspersoft.studio.field.label" value="igv"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vista_reporte_ventas"/>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="total"/>
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vista_reporte_ventas"/>
+	</field>
+	<group name="nro_venta">
+		<expression><![CDATA[$F{nro_venta}]]></expression>
+	</group>
+	<group name="fecha">
+		<expression><![CDATA[$F{fecha}]]></expression>
+	</group>
+	<group name="id_cliente">
+		<expression><![CDATA[$F{id_cliente}]]></expression>
+	</group>
+	<group name="razon_social">
+		<expression><![CDATA[$F{razon_social}]]></expression>
+	</group>
+	<group name="id_asesor_vta">
+		<expression><![CDATA[$F{id_asesor_vta}]]></expression>
+	</group>
+	<group name="nombre_asesor_vta">
+		<expression><![CDATA[$F{nombre_asesor_vta}]]></expression>
+	</group>
+	<group name="subtotal">
+		<expression><![CDATA[$F{subtotal}]]></expression>
+	</group>
+	<group name="igv">
+		<expression><![CDATA[$F{igv}]]></expression>
+	</group>
+	<group name="total">
+		<expression><![CDATA[$F{total}]]></expression>
+	</group>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="textField" uuid="e35aa6ad-8fca-4677-bfa9-54091d8c9ec2" x="110" y="10" width="350" height="60" fontSize="29.0" bold="true" underline="true" hTextAlign="Center">
+			<expression><![CDATA["Reporte de Ventas"]]></expression>
+		</element>
+	</title>
+	<pageHeader height="119" splitType="Stretch">
+		<element kind="staticText" uuid="b8cc8e9d-ccf0-44f1-9d27-fa1cd2840d14" x="320" y="6" width="210" height="94">
+			<text><![CDATA[Dirección: Av. Los Olivos N.º 458, Urb. Santa Isabel, Ate, Lima, Perú
+Teléfono: (01) 458-7621
+Celular: 987 654 321
+Correo electrónico: contacto@veterinariasanmartin.com]]></text>
+		</element>
+		<element kind="image" uuid="fcf3db88-98cd-4920-87e0-c41f56061fa9" x="40" y="0" width="140" height="119">
+			<expression><![CDATA["https://static.vecteezy.com/system/resources/previews/017/352/346/non_2x/illustration-of-the-logo-of-a-veterinary-clinic-vector.jpg"]]></expression>
+		</element>
+	</pageHeader>
+	<columnHeader height="61" splitType="Stretch">
+		<element kind="staticText" uuid="28900b28-b70a-4da3-8193-09a86d7c15b6" x="10" y="31" width="50" height="30" bold="true">
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="829c98f5-ac8a-4e88-86c1-75d4a9ef3486"/>
+			<box>
+				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+			<text><![CDATA[NRO VENTA]]></text>
+		</element>
+		<element kind="staticText" uuid="9b8c622b-fbfe-4987-bd30-2411c072cb5a" x="60" y="31" width="80" height="30" bold="true">
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="28a6e906-5a85-488c-9faa-5e3fb3457ffd"/>
+			<box>
+				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+			<text><![CDATA[FECHA]]></text>
+		</element>
+		<element kind="staticText" uuid="911f51cc-2193-4caf-9571-3a017527c614" x="140" y="31" width="60" height="30" bold="true">
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98763e1a-0569-4802-bf59-fc0abafc57fd"/>
+			<box>
+				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+			<text><![CDATA[ID CLIENTE]]></text>
+		</element>
+		<element kind="staticText" uuid="175e1ddd-5e2d-4158-a100-ccac7e927410" x="200" y="31" width="76" height="30" bold="true">
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="96027460-b845-4389-9479-cf53dd41aae7"/>
+			<box>
+				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+			<text><![CDATA[R.SOCIAL]]></text>
+		</element>
+		<element kind="staticText" uuid="57387166-a344-4bff-8ac9-03aebbde2223" x="276" y="31" width="94" height="30" bold="true">
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f43a0874-b721-43d8-8f10-08582be1a3fc"/>
+			<box>
+				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+			<text><![CDATA[ASESOR]]></text>
+		</element>
+		<element kind="staticText" uuid="42bcca97-1197-4cc1-9330-9c587042f0fe" x="370" y="31" width="60" height="30" bold="true">
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="620f9142-45ba-4de5-98c3-bcb262b1b593"/>
+			<box>
+				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+			<text><![CDATA[SBTO]]></text>
+		</element>
+		<element kind="staticText" uuid="114e97ed-c921-4245-9457-e6127b2f7914" x="430" y="31" width="50" height="30" bold="true">
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="57c7951d-fc1f-4abd-9065-8e8658350204"/>
+			<box>
+				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+			<text><![CDATA[IGV]]></text>
+		</element>
+		<element kind="staticText" uuid="f3de1234-700d-42b2-85d7-7bbe97fcc58a" x="480" y="31" width="50" height="30" bold="true">
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="801b5685-0e0b-4033-86d6-8d2adf5a9fac"/>
+			<box>
+				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+			<text><![CDATA[TOTAL]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<element kind="textField" uuid="c917ce0d-29dd-4ec0-bd57-07dbaa7e004c" x="10" y="11" width="50" height="19">
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="829c98f5-ac8a-4e88-86c1-75d4a9ef3486"/>
+				<expression><![CDATA[$F{nro_venta}]]></expression>
+			</element>
+			<element kind="textField" uuid="1c33a38c-80c8-4447-ba72-1ce2ad779468" x="60" y="11" width="80" height="19">
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="28a6e906-5a85-488c-9faa-5e3fb3457ffd"/>
+				<expression><![CDATA[$F{fecha}]]></expression>
+			</element>
+			<element kind="textField" uuid="dccbb562-b797-41df-a36a-edd490f50315" x="140" y="11" width="60" height="19">
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98763e1a-0569-4802-bf59-fc0abafc57fd"/>
+				<expression><![CDATA[$F{id_cliente}]]></expression>
+			</element>
+			<element kind="textField" uuid="bce55691-6cc1-42af-9846-981e2c1a3402" x="200" y="11" width="76" height="19">
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="96027460-b845-4389-9479-cf53dd41aae7"/>
+				<expression><![CDATA[$F{razon_social}]]></expression>
+			</element>
+			<element kind="textField" uuid="fcf01ed6-80aa-4cb3-a1e4-a589cc2d88e0" x="276" y="11" width="94" height="19">
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f43a0874-b721-43d8-8f10-08582be1a3fc"/>
+				<expression><![CDATA[$F{nombre_asesor_vta}]]></expression>
+			</element>
+			<element kind="textField" uuid="0c9beec2-e3e3-477b-9a28-7e8d3dadd2cd" x="370" y="11" width="60" height="19">
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="620f9142-45ba-4de5-98c3-bcb262b1b593"/>
+				<expression><![CDATA[$F{subtotal}]]></expression>
+			</element>
+			<element kind="textField" uuid="35aadbee-800f-4d5e-8cfa-0746f1798431" x="430" y="11" width="50" height="19">
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="57c7951d-fc1f-4abd-9065-8e8658350204"/>
+				<expression><![CDATA[$F{igv}]]></expression>
+			</element>
+			<element kind="textField" uuid="841de075-9433-4d4a-ac39-3976ee64832d" x="480" y="11" width="50" height="19">
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="801b5685-0e0b-4033-86d6-8d2adf5a9fac"/>
+				<expression><![CDATA[$F{total}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="65" splitType="Stretch">
+		<element kind="textField" uuid="3672578a-cb18-4d1b-b046-039cb87cdc58" x="470" y="20" width="100" height="30" evaluationTime="Report">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="textField" uuid="64e86ebd-6f5f-436c-9e87-449026b9574e" x="227" y="30" width="100" height="30" pattern="MMMMM dd, yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</pageFooter>
+</jasperReport>
