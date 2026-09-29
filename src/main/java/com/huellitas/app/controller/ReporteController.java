@@ -1,6 +1,5 @@
 package com.huellitas.app.controller;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,15 +75,14 @@ public class ReporteController {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("idVenta", idVenta);
 
+            // Cargar la ruta del logo de forma segura como ClassPathResource o String para evitar cerrar el InputStream
             ClassPathResource logoResource = new ClassPathResource("static/images/logo.jpg");
             if (logoResource.exists()) {
-                try (InputStream logoStream = logoResource.getInputStream()) {
-                    parametros.put("logo", logoStream);
-                    return construirRespuestaPdf("BoletaVenta.jrxml", "BoletaVenta_" + idVenta + ".pdf", parametros, modo);
-                }
-            } else {
-                return construirRespuestaPdf("BoletaVenta.jrxml", "BoletaVenta_" + idVenta + ".pdf", parametros, modo);
+                // Pasamos el ClassPathResource o la ruta del recurso
+                parametros.put("logo", logoResource.getURL().toString());
             }
+
+            return construirRespuestaPdf("BoletaVenta.jrxml", "BoletaVenta_" + idVenta + ".pdf", parametros, modo);
 
         } catch (Exception e) {
             e.printStackTrace();
