@@ -289,8 +289,8 @@ th:text="${mascota.genero}">
 <i class="bi bi-person-fill text-primary"></i>
 
 
-<span th:text="${mascota.cliente.nombre + ' ' + mascota.cliente.apellido}">
-
+<span th-text="${mascota.cliente != null ? (mascota.cliente.nombre + ' ' + mascota.cliente.apellido) : 'Sin dueño'}">
+	
 </span>
 
 
