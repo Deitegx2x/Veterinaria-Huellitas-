@@ -90,6 +90,19 @@
 			</resource>
 		</resources>
 		<plugins>
+			<!-- Plugin de Recursos para proteger archivos binarios de JasperReports -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.3.1</version>
+				<configuration>
+					<nonFilteredExtensions>
+						<extension>jasper</extension>
+						<extension>jrxml</extension>
+					</nonFilteredExtensions>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
