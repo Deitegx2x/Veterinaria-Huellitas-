@@ -1,184 +1,156 @@
-<!-- Created with Jaspersoft Studio version 7.0.8.final using JasperReports Library version 7.0.8-6f896111  -->
-<jasperReport name="ReportMascotas" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="afa1f63d-3ba5-4b71-94a3-3ccb4d9fb1ee">
-	<property name="com.jaspersoft.studio.data.sql.tables" value="dmV0ZXJpbmFyaWEubWFzY290YSBBUyAsNjksMzEsZWQ0MDlhMWItZmJjMS00YTFiLWIzZDktOThj&#xa;ZWJjMTAzOTI2O3ZldGVyaW5hcmlhLmNsaWVudGUgQVMgLDIyOCwxMTYsNjg1ZjQyN2UtM2NmMy00&#xa;OWQ5LTk2NDktZjNmNjdkNzQ4NDY3Ow=="/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="veterinaria Data Adapter"/>
-	<query language="SQL"><![CDATA[SELECT veterinaria.mascota.id_mascota,
-	veterinaria.mascota.nombre,
-	veterinaria.mascota.raza,
-	veterinaria.mascota.genero,
-	veterinaria.cliente.nombre,
-	veterinaria.cliente.telefono
-FROM veterinaria.mascota
-	INNER JOIN veterinaria.cliente ON 
-	 veterinaria.mascota.id_cliente = veterinaria.cliente.id_cliente]]></query>
-	<field name="id_mascota" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="id_mascota"/>
-		<property name="com.jaspersoft.studio.field.label" value="id_mascota"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="mascota"/>
-	</field>
-	<field name="nombre" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
-		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="mascota"/>
-	</field>
-	<field name="raza" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="raza"/>
-		<property name="com.jaspersoft.studio.field.label" value="raza"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="mascota"/>
-	</field>
-	<field name="genero" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="genero"/>
-		<property name="com.jaspersoft.studio.field.label" value="genero"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="mascota"/>
-	</field>
-	<field name="COLUMN_5" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
-		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
-	</field>
-	<field name="telefono" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="telefono"/>
-		<property name="com.jaspersoft.studio.field.label" value="telefono"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
-	</field>
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" 
+              name="ReportMascotas" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<queryString language="SQL"><![CDATA[SELECT m.id_mascota,
+	m.nombre,
+	m.raza,
+	m.genero,
+	c.nombre AS nombre_dueno,
+	c.telefono
+FROM mascota m
+	INNER JOIN cliente c ON m.id_cliente = c.id_cliente]]></queryString>
+	<field name="id_mascota" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="raza" class="java.lang.String"/>
+	<field name="genero" class="java.lang.String"/>
+	<field name="nombre_dueno" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
 	<group name="id_mascota">
-		<expression><![CDATA[$F{id_mascota}]]></expression>
+		<groupExpression><![CDATA[$F{id_mascota}]]></groupExpression>
 	</group>
 	<group name="nombre">
-		<expression><![CDATA[$F{nombre}]]></expression>
+		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
 	</group>
 	<group name="raza">
-		<expression><![CDATA[$F{raza}]]></expression>
+		<groupExpression><![CDATA[$F{raza}]]></groupExpression>
 	</group>
 	<group name="genero">
-		<expression><![CDATA[$F{genero}]]></expression>
+		<groupExpression><![CDATA[$F{genero}]]></groupExpression>
 	</group>
-	<group name="COLUMN_5">
-		<expression><![CDATA[$F{COLUMN_5}]]></expression>
+	<group name="nombre_dueno">
+		<groupExpression><![CDATA[$F{nombre_dueno}]]></groupExpression>
 	</group>
 	<group name="telefono">
-		<expression><![CDATA[$F{telefono}]]></expression>
+		<groupExpression><![CDATA[$F{telefono}]]></groupExpression>
 	</group>
-	<background splitType="Stretch"/>
-	<title height="79" splitType="Stretch">
-		<element kind="textField" uuid="243b98ae-5d0e-48c6-b62e-566ccb975261" x="93" y="10" width="368" height="59" fontSize="29.0" bold="true" underline="true" hTextAlign="Center">
-			<expression><![CDATA["Reporte de Mascotas"]]></expression>
-		</element>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="93" y="10" width="368" height="59"/>
+				<textElement textAlignment="Center">
+					<font size="29" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Reporte de Mascotas"]]></textFieldExpression>
+			</textField>
+		</band>
 	</title>
-	<pageHeader height="125" splitType="Stretch">
-		<element kind="staticText" uuid="1856a743-169b-4550-93ac-b695c346373b" x="360" y="16" width="184" height="94">
-			<text><![CDATA[Dirección: Av. Los Olivos N.º 458, Urb. Santa Isabel, Ate, Lima, Perú
+	<pageHeader>
+		<band height="125" splitType="Stretch">
+			<staticText>
+				<reportElement x="360" y="16" width="184" height="94"/>
+				<text><![CDATA[Dirección: Av. Los Olivos N.º 458, Urb. Santa Isabel, Ate, Lima, Perú
 Teléfono: (01) 458-7621
 Celular: 987 654 321
 Correo electrónico: contacto@veterinariasanmartin.com]]></text>
-		</element>
-		<element kind="image" uuid="34ddebfc-613d-4742-95dc-5184b7c29eae" x="40" y="10" width="130" height="115">
-			<expression><![CDATA["https://static.vecteezy.com/system/resources/previews/017/352/346/non_2x/illustration-of-the-logo-of-a-veterinary-clinic-vector.jpg"]]></expression>
-		</element>
+			</staticText>
+			<image>
+				<reportElement x="40" y="10" width="130" height="115"/>
+				<imageExpression><![CDATA["https://static.vecteezy.com/system/resources/previews/017/352/346/non_2x/illustration-of-the-logo-of-a-veterinary-clinic-vector.jpg"]]></imageExpression>
+			</image>
+		</band>
 	</pageHeader>
-	<columnHeader height="70" splitType="Stretch">
-		<element kind="staticText" uuid="26c07826-787f-4ab8-b826-baf786d54b58" x="10" y="30" width="83" height="30" bold="true">
-			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ad9786fe-bede-44bc-92f6-32217862e273"/>
-			<box>
-				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
-				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-			</box>
-			<text><![CDATA[ID]]></text>
-		</element>
-		<element kind="staticText" uuid="0a69a044-cde7-4b6d-9052-8fd07622f7b9" x="93" y="30" width="77" height="30" bold="true">
-			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aaf7b756-10bd-42b2-8472-d3ecd2be10fa"/>
-			<box>
-				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
-				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-			</box>
-			<text><![CDATA[NOMBRE]]></text>
-		</element>
-		<element kind="staticText" uuid="a23a7302-191c-47f0-b6bf-9c8a1c2983e0" x="170" y="30" width="80" height="30" bold="true">
-			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a5004f1b-c7f5-49f0-8698-21042af0d7a5"/>
-			<box>
-				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
-				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-			</box>
-			<text><![CDATA[RAZA]]></text>
-		</element>
-		<element kind="staticText" uuid="e1a190a9-1949-454d-9b1d-f14d762681e4" x="250" y="30" width="80" height="30" bold="true">
-			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c8aad305-4b92-4e07-b240-b836dd5c3b00"/>
-			<box>
-				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
-				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-			</box>
-			<text><![CDATA[GENERO]]></text>
-		</element>
-		<element kind="staticText" uuid="599342b1-cfd8-40b5-93e4-3a717297f918" x="330" y="30" width="90" height="30" bold="true">
-			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7fa6e13b-801e-4e51-a440-39bc35c15e13"/>
-			<box>
-				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
-				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-			</box>
-			<text><![CDATA[NOM DUEÑO]]></text>
-		</element>
-		<element kind="staticText" uuid="e63bde9e-0827-4d49-9dfb-368bc9fa5e0c" x="420" y="30" width="90" height="30" bold="true">
-			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cfa9d4c0-3fb0-4e5c-af01-61a8cdbfb978"/>
-			<box>
-				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
-				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-			</box>
-			<text><![CDATA[TELEFONO ]]></text>
-		</element>
+	<columnHeader>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="30" width="83" height="30"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="30" width="77" height="30"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="30" width="80" height="30"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAZA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="30" width="80" height="30"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GENERO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="30" width="90" height="30"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOM DUEÑO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="30" width="90" height="30"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONO]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
 		<band height="34" splitType="Stretch">
-			<element kind="textField" uuid="b84bcf9a-8682-4344-9010-c1957fa8e6dd" x="10" y="10" width="83" height="20">
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ad9786fe-bede-44bc-92f6-32217862e273"/>
-				<expression><![CDATA[$F{id_mascota}]]></expression>
-			</element>
-			<element kind="textField" uuid="008c69ae-45dc-44a6-9b88-0183a645ee2c" x="93" y="10" width="77" height="20">
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aaf7b756-10bd-42b2-8472-d3ecd2be10fa"/>
-				<expression><![CDATA[$F{nombre}]]></expression>
-			</element>
-			<element kind="textField" uuid="c0ea5985-1082-424a-a6d4-0531757828e9" x="170" y="10" width="80" height="20">
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a5004f1b-c7f5-49f0-8698-21042af0d7a5"/>
-				<expression><![CDATA[$F{raza}]]></expression>
-			</element>
-			<element kind="textField" uuid="fc591260-bbe7-4b04-9bc8-439d0a3b0f4c" x="250" y="10" width="80" height="20">
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c8aad305-4b92-4e07-b240-b836dd5c3b00"/>
-				<expression><![CDATA[$F{genero}]]></expression>
-			</element>
-			<element kind="textField" uuid="d28f9bff-5a06-46ca-915c-bcae717aa414" x="330" y="10" width="90" height="20">
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7fa6e13b-801e-4e51-a440-39bc35c15e13"/>
-				<expression><![CDATA[$F{COLUMN_5}]]></expression>
-			</element>
-			<element kind="textField" uuid="22bbd31e-75bb-4b5a-a051-c10d2283529f" x="420" y="10" width="90" height="20">
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cfa9d4c0-3fb0-4e5c-af01-61a8cdbfb978"/>
-				<expression><![CDATA[$F{telefono}]]></expression>
-			</element>
+			<textField>
+				<reportElement x="10" y="10" width="83" height="20"/>
+				<textFieldExpression><![CDATA[$F{id_mascota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="93" y="10" width="77" height="20"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="10" width="80" height="20"/>
+				<textFieldExpression><![CDATA[$F{raza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="10" width="80" height="20"/>
+				<textFieldExpression><![CDATA[$F{genero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="10" width="90" height="20"/>
+				<textFieldExpression><![CDATA[$F{nombre_dueno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="10" width="90" height="20"/>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
-	<columnFooter height="45" splitType="Stretch"/>
-	<pageFooter height="83" splitType="Stretch">
-		<element kind="textField" uuid="03b9ef27-d7da-4c51-ad58-4ad5f8c526bb" x="470" y="30" width="100" height="30">
-			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
-		</element>
-		<element kind="textField" uuid="833a0bbf-27ba-42ce-bd57-ba4518eae4f1" x="230" y="40" width="100" height="30" pattern="MMMMM dd, yyyy">
-			<box>
-				<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
-				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-			</box>
-			<expression><![CDATA[new java.util.Date()]]></expression>
-		</element>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="83" splitType="Stretch">
+			<textField>
+				<reportElement x="470" y="30" width="100" height="30"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="230" y="40" width="100" height="30"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 </jasperReport>

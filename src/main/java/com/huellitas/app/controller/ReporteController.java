@@ -75,11 +75,11 @@ public class ReporteController {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("idVenta", idVenta);
 
-            // Cargar la ruta del logo de forma segura como ClassPathResource o String para evitar cerrar el InputStream
+            // Cargar la ruta del logo de forma segura dentro del JAR
             ClassPathResource logoResource = new ClassPathResource("static/images/logo.jpg");
             if (logoResource.exists()) {
-                // Pasamos el ClassPathResource o la ruta del recurso
-                parametros.put("logo", logoResource.getURL().toString());
+                // Pasamos el objeto URL directamente en lugar de String
+                parametros.put("logo", logoResource.getURL());
             }
 
             return construirRespuestaPdf("BoletaVenta.jrxml", "BoletaVenta_" + idVenta + ".pdf", parametros, modo);
